@@ -87,7 +87,14 @@ export async function getUser(user: UserRecord, cached = false): Promise<UserRec
     graduated: true,
   };
 
-  return testUser;
+  // Check if the uname and password entered match testUser's credentials
+  const unameMatch = user && user.uname == testUser.uname;
+  const passwordMatch = user && user.password == testUser.password;
+
+  if (unameMatch && passwordMatch) {
+    return testUser;
+  }
+  return null;
 
   // FOR THOSE WHO ARE INTERESTED IN HOW IT'S ACTUALLY IMPLEMENTED
   if (cached) {
